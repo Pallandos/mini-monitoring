@@ -1,7 +1,7 @@
 {
-  "name": "i-want-typescript",
+  "name": "mini-monitoring",
   "version": "1.0.0",
-  "description": "📜 Template repository for a new Node.js TypeScript project linted using ESLint with Prettier",
+  "description": "A minimal monitoring tool built with TypeScript, deployed in Docker",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "moduleDirectories": [
@@ -48,5 +48,10 @@
     "ts-node": "^10.9.2",
     "typescript": "<=5.6.0",
     "typescript-eslint": "^8.9.0"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^5.1.0",
+    "systeminformation": "^5.27.11"
   }
 }
