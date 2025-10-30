@@ -51,10 +51,10 @@ app.get('/system-info', async (req, res) => {
     const data = await getSystemInformation();
     res.json(data);
   } catch (error) {
-    res.status(500).json({ error: 'Erreur lors de la récupération des données système' });
+    res.status(500).json({ error: 'Fail to obtain sys infos' });
   }
 });
 
 app.listen(port, () => {
-  console.log(`Serveur de monitoring en cours sur http://localhost:${port}`);
+  console.log(`Monitoring server is live on http://localhost:${port}`);
 });
