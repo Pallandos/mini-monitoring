@@ -14,7 +14,7 @@ Le ficheir `package-lock.json` est généré automatiquement lui, et défini les
 
 ### q3 )
 
-Lorsque j'installe `systeminformation` cela ajoute ce package comme *dependecie* dnas `package.json`. La principale différence entre *dependencies* et *devDependencies* est que uniquement les premières sont **nécessaires** au fonctionement en production (installées par `nmp install`) alors que les autres seront ignorées dans un environement de production (`npm install --production` les ignore).
+Lorsque j'installe `systeminformation` cela ajoute ce package comme *dependecie* dnas `package.json`. La principale différence entre *dependencies* et *devDependencies* est que uniquement les premières sont **nécessaires** au fonctionement en production (installées par `npm install`) alors que les autres seront ignorées dans un environement de production (`npm install --production` les ignore).
 
 ### q4 )
 
@@ -73,3 +73,47 @@ Le formalisme utilisé est classique dans le cas des API, et cela permet de cons
 Le jeu de test que j'ai écrit va vérifier la structure du json renvoyé, en particulier les champs tels que *cpu*, *system*, *load* etc... Cela permet de confirmer que l'application a bien le comportement attendu. 
 
 ## TD2 
+
+### Q4 )
+
+Le flag `-p` permet d'exposer des ports entre l'hôte et le conteneur. Par exemple la syntaxe `-p 3000:3001` va lier le port 3000 de l'hôte et le port 3001 du conteneur. Cela signifie que toute requête envoyée à `localhost:3000` sera automatiquement envoyée au port 3001 du conteneur. 
+
+Le flag `-m` permet de définir la limite de mémoire allouée à un conteneur. Le conteneur ne pourra en aucun cas avoir accès à plus de memoire que défini par le flag `-m`. De même, le flag `--cpus` défini le nombre de cpu cores disponibles pour le conteneur. 
+
+Ces valeurs peuvent donc avoir un impact sur les performances de notre conteneur. 
+
+### Q5 )
+
+```
+IMAGE          CREATED             CREATED BY                                      SIZE      COMMENT
+e2e406240cd8   About an hour ago   CMD ["npm" "run" "start"]                       0B        buildkit.dockerfile.v0
+<missing>      About an hour ago   EXPOSE [3000/tcp]                               0B        buildkit.dockerfile.v0
+<missing>      About an hour ago   RUN /bin/sh -c npm run build # buildkit         34.7kB    buildkit.dockerfile.v0
+<missing>      About an hour ago   RUN /bin/sh -c npm install # buildkit           98.2MB    buildkit.dockerfile.v0
+<missing>      About an hour ago   RUN /bin/sh -c apk add --no-cache nodejs npm…   81.6MB    buildkit.dockerfile.v0
+<missing>      About an hour ago   COPY package-lock.json /app/ # buildkit         395kB     buildkit.dockerfile.v0
+<missing>      About an hour ago   COPY package.json /app/ # buildkit              1.68kB    buildkit.dockerfile.v0
+<missing>      About an hour ago   COPY tsconfig.json /app/ # buildkit             579B      buildkit.dockerfile.v0
+<missing>      About an hour ago   COPY src/ /app/src/ # buildkit                  1.67kB    buildkit.dockerfile.v0
+<missing>      About an hour ago   WORKDIR /app                                    0B        buildkit.dockerfile.v0
+<missing>      3 weeks ago         CMD ["/bin/sh"]                                 0B        buildkit.dockerfile.v0
+<missing>      3 weeks ago         ADD alpine-minirootfs-3.22.2-x86_64.tar.gz /…   8.32MB    buildkit.dockerfile.v0
+```
+
+On peut voir l'historique des commandes passées par le conteneur, et surtout la taille des modifications aportées. On remarque donc que pour réduire la taille de l'image il faut travailler sur les opérations les plus couteuses, dans notre cas l'installation des *dependecies*. 
+
+### Q6 )
+
+Pour réduire au max la taille j'ai fait un build *multi-stage* et je ne copie que les dépendances de production (via la commande `npm ci` pour *clean install*).
+
+### Q7 ) 
+
+L'image est publiée sur dockerHub : https://hub.docker.com/repository/docker/pallandos/mini-monitoring/general
+
+### Q8 ) 
+
+On peut directement *pull* depuis le dépot DockerHub et run avec la commande :
+
+    docker run -p 3000:3000 -d pallandos/mini-monitoring:light
+
+## TD3
