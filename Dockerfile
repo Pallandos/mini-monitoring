@@ -20,6 +20,9 @@ RUN npm run build
 # ==== Production Stage =====
 FROM alpine:latest
 
+# for linking to source repository
+LABEL org.opencontainers.image.source https://github.com/pallandos/mini-monitoring
+
 WORKDIR /app
 
 # copy built files and package.json
