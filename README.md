@@ -2,46 +2,20 @@
 
 ## Usage
 
-Install development dependencies:
+You can run commands for `node` on local :
 
-```
-npm install
-```
-
-Lint, then format `src/*.ts` by making in-place fixes:
-
-```
-npm run lint && npm run format
-# or:
-npm run fix
+```bash
+npm install         # install dependecies 
+npm build           # build application
+npm clean           # remove all compiled files      
+npm start           # start server   
+npm test            # run tests          
 ```
 
-Run unit test suites:
+## Docker build
 
-```
-npm run test
-```
+You can use `docker build` to build the image before running it or juste do :
 
-View coverage of unit tests:
+    make
 
-```
-npm run test:coverage
-```
-
-Build `src/*.ts` files into `dist/*.js` files:
-
-```
-npm run build
-```
-
-Serve `dist/index.js` using `node` (for production):
-
-```
-npm run start
-```
-
-Monitor file changes and serve `src/index.ts` using `nodemon` with `ts-node` (for development):
-
-```
-npm run watch
-```
+and it will build the image
