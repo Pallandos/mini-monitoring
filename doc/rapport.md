@@ -67,3 +67,9 @@ J'ai testé mon server avec [Thunder Client](https://docs.thunderclient.com/) un
 ```
 
 Le formalisme utilisé est classique dans le cas des API, et cela permet de construire une architecture à bases de micro services, et donc d'inclure notre API dans des applications de manière modulaire. 
+
+### q6 )
+
+Le jeu de test que j'ai écrit va vérifier la structure du json renvoyé, en particulier les champs tels que *cpu*, *system*, *load* etc... Cela permet de confirmer que l'application a bien le comportement attendu. 
+
+## TD2 
