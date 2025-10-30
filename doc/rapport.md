@@ -117,3 +117,12 @@ On peut directement *pull* depuis le dépot DockerHub et run avec la commande :
     docker run -p 3000:3000 -d pallandos/mini-monitoring:light
 
 ## TD3
+
+### Q3 )
+
+On peut voir dans l'onglet "actions" du dépôt tous les runs des workflows. 
+
+### Q4 )
+
+En effet, écrire les jeux de test est très important car en intégration continue il permet de s'assurer que chaque *commit* ne fait pas régresser la *codebase* : c'est à dire on peut savoir tout de suite si une modification introduit des bugs ou non. 
+
