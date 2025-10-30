@@ -28,7 +28,7 @@ jobs:
         with:
           registry: ghcr.io
           username: ${{ secrets.GH_USERNAME }}
-          password: ${{ secrets.GH_TOKEN }}
+          password: ${{ secrets.GHB_TOKEN }}
       
       - name: Build and push Docker images to Docker Hub
         uses: docker/build-push-action@v4
