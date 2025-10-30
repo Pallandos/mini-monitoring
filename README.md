@@ -12,10 +12,16 @@ npm start           # start server
 npm test            # run tests          
 ```
 
-## Docker build
+###  Docker build
 
 You can use `docker build` to build the image before running it or juste do :
 
     make
 
 and it will build the image
+
+### Docker run
+
+Once builded, you can run the container with the following command :
+
+    docker run -p 3000:3000 mini-monitoring:latest --name mini-monitoring
