@@ -14,7 +14,7 @@ export interface ISystemInformation {
 }
 
 // Fonction pour collecter et sérialiser les données système
-async function getSystemInformation(): Promise<ISystemInformation> {
+export async function getSystemInformation(): Promise<ISystemInformation> {
   const [cpu, system, mem, os, currentLoad, processes, diskLayout, networkInterfaces] = await Promise.all([
     si.cpu(),
     si.system(),
@@ -39,8 +39,7 @@ async function getSystemInformation(): Promise<ISystemInformation> {
 }
 
 // Serveur Express pour exposer l'API
-const app = express();
-const port = 3000;
+export const app = express();
 
 app.use(cors());
 app.use(express.json());
@@ -53,8 +52,4 @@ app.get('/system-info', async (req, res) => {
   } catch (error) {
     res.status(500).json({ error: 'Fail to obtain sys infos' });
   }
-});
-
-app.listen(port, () => {
-  console.log(`Monitoring server is live on http://localhost:${port}`);
 });
