@@ -25,8 +25,8 @@ jobs:
         uses: docker/login-action@v2
         with:
           registry: docker.io/
-          username: ${{ secrets.AZUREAPPSERVICE_CONTAINERUSERNAME_B1FAAEC422D9467396238AC0E9D9A753 }}
-          password: ${{ secrets.AZUREAPPSERVICE_CONTAINERPASSWORD_2D0FF06C07BF418E86516865800AA908 }}
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_PAT }}
 
       - name: Build and push container image to registry
         uses: docker/build-push-action@v3
@@ -60,4 +60,5 @@ jobs:
           app-name: 'mini-monitor'
           slot-name: 'Production'
           images: 'docker.io/${{ secrets.AZUREAPPSERVICE_CONTAINERUSERNAME_B1FAAEC422D9467396238AC0E9D9A753 }}/mini-monitoring:${{ github.sha }}'
+
           
