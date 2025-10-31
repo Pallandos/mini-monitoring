@@ -300,3 +300,9 @@ Une fois déployé, on peut voir les résultats :
 ```
 
 On peut remarquer un CPU de server très puissant en physique, mais par contre la carte ethernet est virtualisée. Le conteneur a hérité d'un seul coeur de CPU alors que quand je faisais tourner mon conteneur sur ma machine je voyais tous les coeurs. Je pense donc que le conteneur tourne dans une machine virtuelle qui elle même fait tourner le Docker engine. 
+
+### Difficultées
+
+J'ai eu de nombreuses petites difficultées sur des droits d'accès avec Azure. Problèmes de nuances entre un *registre* et un *domaine* DockerHub du point de vue de Azure. De même, Azure se trompe dans le nom des secrets donc j'ai du reprendre tout cela. 
+
+Gérer le *networking* est aussi complexe pour une applicaiton : je ne comprends pas comment on ouvre les ports etc.
