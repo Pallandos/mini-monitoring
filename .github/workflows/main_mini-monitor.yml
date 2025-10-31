@@ -24,7 +24,6 @@ jobs:
       - name: Log in to container registry
         uses: docker/login-action@v2
         with:
-          registry: docker.io/
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_PAT }}
 
@@ -62,3 +61,4 @@ jobs:
           images: 'docker.io/${{ secrets.AZUREAPPSERVICE_CONTAINERUSERNAME_B1FAAEC422D9467396238AC0E9D9A753 }}/mini-monitoring:${{ github.sha }}'
 
           
+
