@@ -126,3 +126,177 @@ On peut voir dans l'onglet "actions" du dépôt tous les runs des workflows.
 
 En effet, écrire les jeux de test est très important car en intégration continue il permet de s'assurer que chaque *commit* ne fait pas régresser la *codebase* : c'est à dire on peut savoir tout de suite si une modification introduit des bugs ou non. 
 
+## TD4 )
+
+La principale difficulté des PaaS comme Azure ou AWS est les *policies*. Nous n'avons jamais les droits de rien faire et il faut toujours s'accorder les droits. Dans mon cas, chaque user sur le *student pack* a le droit de déployer dans un petit nombre (5) de régions, et ce ne sont jamais les mêmes d'un *user* à l'autre. Il faut donc d'abord aller voir quelles sont ces régions. Dans mon cas :
+
+```
+["francecentral","norwayeast","germanywestcentral","italynorth","spaincentral"]
+```
+
+De même, il faut bien penser à ouvrir les ports (dnas notre cas le 3000) sinon on ne pourra pas y accéder. 
+
+Une fois déployé, on peut voir les résultats :
+
+```json
+{
+  "cpu": {
+    "manufacturer": "AMD",
+    "brand": "EPYC 7763 64-Core Processor",
+    "vendor": "",
+    "family": "",
+    "model": "",
+    "stepping": "",
+    "revision": "",
+    "voltage": "",
+    "speed": 2.45,
+    "speedMin": null,
+    "speedMax": null,
+    "governor": "",
+    "cores": 1,
+    "physicalCores": 1,
+    "performanceCores": 1,
+    "efficiencyCores": 0,
+    "processors": 1,
+    "socket": "",
+    "flags": "",
+    "virtualization": false,
+    "cache": {
+      "l1d": "",
+      "l1i": "",
+      "l2": "",
+      "l3": ""
+    }
+  },
+  "system": {
+    "manufacturer": "Microsoft",
+    "model": "WSL",
+    "version": "2",
+    "serial": "-",
+    "uuid": "",
+    "sku": "-",
+    "virtual": true
+  },
+  "mem": {
+    "total": 1559314432,
+    "free": 1375531008,
+    "used": 183783424,
+    "active": 209186816,
+    "available": 1350127616,
+    "buffers": 2547712,
+    "cached": 88080384,
+    "slab": 21123072,
+    "buffcache": 111751168,
+    "reclaimable": 9060352,
+    "swaptotal": 0,
+    "swapused": 0,
+    "swapfree": 0,
+    "writeback": 0,
+    "dirty": 0
+  },
+  "os": {
+    "platform": "linux",
+    "distro": "Alpine Linux",
+    "release": "v3.22",
+    "codename": "",
+    "kernel": "6.1.91.1-microsoft-standard",
+    "arch": "x64",
+    "hostname": "SandboxHost-638975051907679906",
+    "fqdn": "SandboxHost-638975051907679906",
+    "codepage": "UTF-8",
+    "logofile": "alpine-linux",
+    "serial": "",
+    "build": "",
+    "servicepack": "",
+    "uefi": false
+  },
+  "currentLoad": {
+    "avgLoad": 0,
+    "currentLoad": 0.4952225588440923,
+    "currentLoadUser": 0.19808902353763694,
+    "currentLoadSystem": 0.29713353530645537,
+    "currentLoadNice": 0,
+    "currentLoadIdle": 99.50477744115591,
+    "currentLoadIrq": 0,
+    "currentLoadSteal": 0,
+    "currentLoadGuest": 0,
+    "rawCurrentLoad": 850,
+    "rawCurrentLoadUser": 340,
+    "rawCurrentLoadSystem": 510,
+    "rawCurrentLoadNice": 0,
+    "rawCurrentLoadIdle": 170790,
+    "rawCurrentLoadIrq": 0,
+    "rawCurrentLoadSteal": 0,
+    "rawCurrentLoadGuest": 0,
+    "cpus": [
+      {
+        "load": 0.4952225588440923,
+        "loadUser": 0.19808902353763694,
+        "loadSystem": 0.29713353530645537,
+        "loadNice": 0,
+        "loadIdle": 99.50477744115591,
+        "loadIrq": 0,
+        "loadSteal": 0,
+        "loadGuest": 0,
+        "rawLoad": 850,
+        "rawLoadUser": 340,
+        "rawLoadSystem": 510,
+        "rawLoadNice": 0,
+        "rawLoadIdle": 170790,
+        "rawLoadIrq": 0,
+        "rawLoadSteal": 0,
+        "rawLoadGuest": 0
+      }
+    ]
+  },
+  "diskLayout": [],
+  "networkInterfaces": [
+    {
+      "iface": "lo",
+      "ifaceName": "lo",
+      "default": false,
+      "ip4": "127.0.0.1",
+      "ip4subnet": "255.0.0.0",
+      "ip6": "::1",
+      "ip6subnet": "ffff:ffff:ffff:ffff:ffff:ffff:ffff:ffff",
+      "mac": "00:00:00:00:00:00",
+      "internal": true,
+      "virtual": false,
+      "operstate": "unknown",
+      "type": "virtual",
+      "duplex": "",
+      "mtu": 65536,
+      "speed": null,
+      "dhcp": false,
+      "dnsSuffix": "Unknown",
+      "ieee8021xAuth": "Not defined",
+      "ieee8021xState": "Disabled",
+      "carrierChanges": 0
+    },
+    {
+      "iface": "eth0",
+      "ifaceName": "eth0",
+      "default": true,
+      "ip4": "192.168.0.165",
+      "ip4subnet": "255.255.255.0",
+      "ip6": "fe80::215:5dff:fed8:edc6",
+      "ip6subnet": "ffff:ffff:ffff:ffff::",
+      "mac": "00:15:5d:d8:ed:c6",
+      "internal": false,
+      "virtual": false,
+      "operstate": "up",
+      "type": "wired",
+      "duplex": "full",
+      "mtu": 1450,
+      "speed": 50000,
+      "dhcp": false,
+      "dnsSuffix": "Unknown",
+      "ieee8021xAuth": "Not defined",
+      "ieee8021xState": "Disabled",
+      "carrierChanges": 1
+    }
+  ]
+}
+```
+
+On peut remarquer un CPU de server très puissant en physique, mais par contre la carte ethernet est virtualisée. Le conteneur a hérité d'un seul coeur de CPU alors que quand je faisais tourner mon conteneur sur ma machine je voyais tous les coeurs. Je pense donc que le conteneur tourne dans une machine virtuelle qui elle même fait tourner le Docker engine. 
