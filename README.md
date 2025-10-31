@@ -25,3 +25,9 @@ and it will build the image
 Once builded, you can run the container with the following command :
 
     docker run -p 3000:3000 mini-monitoring:latest --name mini-monitoring
+
+## Access the API
+
+The API can be accessed on port 3000 on the following endpoint :
+
+    /api/v1/system-info

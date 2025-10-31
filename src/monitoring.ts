@@ -45,7 +45,7 @@ app.use(cors());
 app.use(express.json());
 
 // Route pour obtenir les infos système sérialisées
-app.get('/system-info', async (req, res) => {
+app.get('api/v1/system-info', async (req, res) => {
   try {
     const data = await getSystemInformation();
     res.json(data);
