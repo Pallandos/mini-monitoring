@@ -24,16 +24,16 @@ jobs:
       - name: Log in to container registry
         uses: docker/login-action@v2
         with:
-          registry: https://index.docker.io/
-          username: ${{ secrets.AZUREAPPSERVICE_CONTAINERUSERNAME_A56B1C63E098442FA60FF90B6C71D3CA }}
-          password: ${{ secrets.AZUREAPPSERVICE_CONTAINERPASSWORD_B9DF372D20E2445CB9335DDFCDB21F8E }}
+          registry: docker.io/
+          username: ${{ secrets.AZUREAPPSERVICE_CONTAINERUSERNAME_31E7D1C984FE4852AAFFF72A99AB39BC }}
+          password: ${{ secrets.AZUREAPPSERVICE_CONTAINERPASSWORD_87375E4025CA4BCD893EC01E1640B679 }}
 
       - name: Build and push container image to registry
         uses: docker/build-push-action@v3
         with:
           context: .
           push: true
-          tags: index.docker.io/${{ secrets.AZUREAPPSERVICE_CONTAINERUSERNAME_A56B1C63E098442FA60FF90B6C71D3CA }}/pallandos/mini-monitoring:${{ github.sha }}
+          tags: docker.io/${{ secrets.AZUREAPPSERVICE_CONTAINERUSERNAME_31E7D1C984FE4852AAFFF72A99AB39BC }}/pallandos/mini-monitoring:${{ github.sha }}
           file: ./Dockerfile
 
   deploy:
@@ -49,9 +49,9 @@ jobs:
       - name: Login to Azure
         uses: azure/login@v2
         with:
-          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_D90EF5D4BF4E486C9E286262499D4A56 }}
-          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_9B99E32A4C584021BBA9B7892BFA6077 }}
-          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_08E087749EC844D6B4FF4F5970A445AB }}
+          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_D889127FC6CB49858FC0A621DF71C578 }}
+          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_CF1DCB19FB294896A2868F971A315282 }}
+          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_6269100F141047379D6478EF2744B727 }}
 
       - name: Deploy to Azure Web App
         id: deploy-to-webapp
@@ -59,5 +59,5 @@ jobs:
         with:
           app-name: 'mini-monitor'
           slot-name: 'Production'
-          images: 'index.docker.io/${{ secrets.AZUREAPPSERVICE_CONTAINERUSERNAME_A56B1C63E098442FA60FF90B6C71D3CA }}/pallandos/mini-monitoring:${{ github.sha }}'
+          images: 'docker.io/${{ secrets.AZUREAPPSERVICE_CONTAINERUSERNAME_31E7D1C984FE4852AAFFF72A99AB39BC }}/pallandos/mini-monitoring:${{ github.sha }}'
           
