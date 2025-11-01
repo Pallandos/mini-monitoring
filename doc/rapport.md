@@ -305,6 +305,8 @@ On peut remarquer un CPU de server très puissant en physique, mais par contre l
 
 J'ai eu de nombreuses petites difficultées sur des droits d'accès avec Azure. Problèmes de nuances entre un *registre* et un *domaine* DockerHub du point de vue de Azure. De même, Azure se trompe dans le nom des secrets donc j'ai du reprendre tout cela. 
 
-Gérer le *networking* est aussi complexe pour une applicaiton : je ne comprends pas comment on ouvre les ports etc.
+Mais la plus grande difficulté a été la compatiblité des architectures. Les images Docker ne sont en effet **pas** cross-platforms... or il est très difficile de voir quelle est l'architecture utilisée par Azure. J'ai donc dû rajouter un build cross-platform (`arm54` et `amd64`). 
+
+Gérer le *networking* est aussi complexe pour une applicaiton : je ne comprends pas comment on ouvre les ports etc. 
 
 J'ai utilisé un *weebhook* sur DockerHub car cela est beaucoup plus simple que les Github Actions.
