@@ -57,3 +57,7 @@ jobs:
           tags: |
             ${{ secrets.DOCKERHUB_USERNAME }}/mini-monitoring:light
             ghcr.io/${{ secrets.GH_USERNAME }}/mini-monitoring:latest
+      
+      - name: Trigger Azure webhook
+        run: |
+          curl -X POST "{{ secrets.AZURE_WEBHOOK_URL }}"
