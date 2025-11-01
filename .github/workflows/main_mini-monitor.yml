@@ -60,4 +60,4 @@ jobs:
       
       - name: Trigger Azure webhook
         run: |
-          curl -v -X POST '${{ secrets.AZURE_WEBHOOK_URL }}" -H "Content-Type: application/json' -d '{}'
+          curl -v -X POST '${{ secrets.AZURE_WEBHOOK_URL }}' -H "Content-Type: application/json' -d '{}'
