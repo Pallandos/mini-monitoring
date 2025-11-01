@@ -55,6 +55,5 @@ jobs:
           context: .
           push: true
           tags: |
-            ${{ secrets.DOCKERHUB_USERNAME }}/mini-monitoring:latest
             ${{ secrets.DOCKERHUB_USERNAME }}/mini-monitoring:light
             ghcr.io/${{ secrets.GH_USERNAME }}/mini-monitoring:latest
