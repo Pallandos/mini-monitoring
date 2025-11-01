@@ -1,7 +1,7 @@
 # Docs for the Azure Web Apps Deploy action: https://github.com/Azure/webapps-deploy
 # More GitHub Actions for Azure: https://github.com/Azure/actions
 
-name: test, build and deploy container app to Azure Web App - mini-monitor
+name: test and build - mini-monitor
 
 on:
   push:
@@ -36,44 +36,25 @@ jobs:
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
 
-      - name: Log in to container registry
+      - name: Log in to Docker Hub
         uses: docker/login-action@v2
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_PAT }}
-
-      - name: Build and push container image to registry
-        uses: docker/build-push-action@v3
+      
+      - name: Log in to GitHub Container Registry
+        uses: docker/login-action@v2
+        with:
+          registry: ghcr.io
+          username: ${{ secrets.GH_USERNAME }}
+          password: ${{ secrets.GHB_TOKEN }}
+      
+      - name: Build and push Docker images to Docker Hub
+        uses: docker/build-push-action@v4
         with:
           context: .
           push: true
-          tags: docker.io/${{ secrets.AZUREAPPSERVICE_CONTAINERUSERNAME_B1FAAEC422D9467396238AC0E9D9A753 }}/mini-monitoring:${{ github.sha }}
-          file: ./Dockerfile
-
-  deploy:
-    runs-on: ubuntu-latest
-    permissions:
-      id-token: write #This is required for requesting the JWT
-      contents: read #This is required for actions/checkout
-
-    needs: build
-    
-    steps:
-      
-      - name: Login to Azure
-        uses: azure/login@v2
-        with:
-          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_314BC682361141DFAC4F76AFBEDDDA7D }}
-          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_0A1CA250446F4FD9935C13117F421DFB }}
-          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_E66F9B8703744C61BA3665C8019C97F0 }}
-
-      - name: Deploy to Azure Web App
-        id: deploy-to-webapp
-        uses: azure/webapps-deploy@v2
-        with:
-          app-name: 'mini-monitor'
-          slot-name: 'Production'
-          images: 'docker.io/${{ secrets.AZUREAPPSERVICE_CONTAINERUSERNAME_B1FAAEC422D9467396238AC0E9D9A753 }}/mini-monitoring:${{ github.sha }}'
-
-          
-
+          tags: |
+            ${{ secrets.DOCKERHUB_USERNAME }}/mini-monitoring:latest
+            ${{ secrets.DOCKERHUB_USERNAME }}/mini-monitoring:light
+            ghcr.io/${{ secrets.GH_USERNAME }}/mini-monitoring:latest
