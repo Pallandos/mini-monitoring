@@ -310,3 +310,5 @@ Mais la plus grande difficulté a été la compatiblité des architectures. Les 
 Gérer le *networking* est aussi complexe pour une applicaiton : je ne comprends pas comment on ouvre les ports etc. 
 
 J'ai utilisé un *weebhook* sur DockerHub car cela est beaucoup plus simple que les Github Actions.
+
+Maintenant, le site est en CD [à cette adresse](https://mini-monitoring-b2f4f4gwefgtevdm.francecentral-01.azurewebsites.net/api/v1/system-info).
