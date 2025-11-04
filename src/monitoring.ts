@@ -38,6 +38,8 @@ export async function getSystemInformation(): Promise<ISystemInformation> {
   };
 }
 
+// test
+
 // Serveur Express pour exposer l'API
 export const app = express();
 
